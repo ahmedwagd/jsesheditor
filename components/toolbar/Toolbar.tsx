@@ -1,22 +1,6 @@
 "use client";
 
-import { useEditorStore, selectHasSelection } from "@/store/useEditorStore";
 import { Button } from "@/components/ui/button";
-import {
-  RotateCw,
-  RotateCcw,
-  FlipHorizontal,
-  FlipVertical,
-  Trash2,
-  Clipboard,
-  RotateCcw as Reset,
-} from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import {
   Select,
   SelectContent,
@@ -24,7 +8,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { selectHasSelection, useEditorStore } from "@/store/useEditorStore";
 import type { ExportSize, RotationDeg } from "@/types";
+import {
+  FlipHorizontal,
+  FlipVertical,
+  RotateCcw as Reset,
+  RotateCcw,
+  RotateCw,
+  Trash2,
+} from "lucide-react";
 
 export function Toolbar() {
   const hasSelection = useEditorStore(selectHasSelection);
@@ -208,7 +206,7 @@ function ToolbarButton({
 }: ToolbarButtonProps) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger>
         <Button
           size="icon"
           variant={variant === "destructive" ? "destructive" : "ghost"}

@@ -1,8 +1,7 @@
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -27,7 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // use suppressHydrationWarning to suppress the warning about the html element not being found
     <html
+      suppressHydrationWarning
       lang="en"
       className={cn(
         "h-full",
@@ -38,9 +39,7 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
-        <TooltipProvider>{children}</TooltipProvider>
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

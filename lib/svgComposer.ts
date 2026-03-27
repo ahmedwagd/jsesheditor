@@ -37,6 +37,7 @@ export function composeSvg(
     : `width="${vb.width}" height="${vb.height}"`;
 
   const glyphElements = glyphs
+    .slice()
     .sort((a, b) => a.position - b.position)
     .map((glyph) => {
       const rawSvg =
