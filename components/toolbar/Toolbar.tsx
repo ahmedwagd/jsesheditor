@@ -206,16 +206,18 @@ function ToolbarButton({
 }: ToolbarButtonProps) {
   return (
     <Tooltip>
-      <TooltipTrigger>
-        <Button
-          size="icon"
-          variant={variant === "destructive" ? "destructive" : "ghost"}
-          className="h-7 w-7 text-stone-300 hover:text-white hover:bg-stone-700"
-          onClick={onClick}
-          aria-label={tooltip}
-        >
-          {icon ?? children}
-        </Button>
+      <TooltipTrigger
+        render={
+          <Button
+            size="icon"
+            variant={variant === "destructive" ? "destructive" : "ghost"}
+            className="h-7 w-7 text-stone-300 hover:text-white hover:bg-stone-700"
+            onClick={onClick}
+            aria-label={tooltip}
+          />
+        }
+      >
+        {icon ?? children}
       </TooltipTrigger>
       <TooltipContent
         side="bottom"

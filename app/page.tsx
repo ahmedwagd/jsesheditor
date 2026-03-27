@@ -38,7 +38,7 @@ export default function EditorPage() {
           </header>
 
           {/* Contextual toolbar — only visible when glyphs are selected */}
-          <div className="flex justify-center px-4 py-1.5 border-b border-stone-800 min-h-[44px] items-center shrink-0">
+          <div className="flex justify-center px-4 py-1.5 border-b border-stone-800 min-h-11 items-center shrink-0">
             <Toolbar />
           </div>
 
