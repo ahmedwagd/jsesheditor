@@ -10,6 +10,59 @@ import type { GardinerCode, GlyphRegistryEntry } from "@/types";
  *  G  — Birds
  *  ... etc.
  */
+
+// "
+// 2
+// 20
+// 200
+// 3
+// 30
+// 300
+// 4
+// 40
+// 400
+// 5
+// 50
+// 500
+// A1
+// A1A
+// A1B
+// A1C
+// A2
+// A2A
+// A3
+// A3A
+// A3B
+// A4
+// A4A
+// A4B
+// A4C
+// A4D
+// A5
+// A5A
+// A5B
+// A6
+// A6A
+// A6B
+// A6C
+// A6D
+// A6E
+// A6F
+// A6G
+// A6h
+// A6I
+// A6J
+// A6K
+// A6L
+// A7
+// A7A
+// A8
+// A8A
+// A9
+// A9A
+// A9B
+// A9C
+// "
 const REGISTRY_SEED: Omit<GlyphRegistryEntry, "svgContent">[] = [
   {
     code: "A1",

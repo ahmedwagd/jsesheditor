@@ -208,7 +208,7 @@ function ToolbarButton({
 }: ToolbarButtonProps) {
   return (
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button
           size="icon"
           variant={variant === "destructive" ? "destructive" : "ghost"}

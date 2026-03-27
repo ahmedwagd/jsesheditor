@@ -77,7 +77,7 @@ export function composeSvg(
  */
 function extractSvgInner(rawSvg: string): string {
   // Remove XML declaration and DOCTYPE if present
-  let clean = rawSvg
+  const clean = rawSvg
     .replace(/<\?xml[^>]*\?>/gi, "")
     .replace(/<!DOCTYPE[^>]*>/gi, "");
   // Extract content between <svg ...> and </svg>
