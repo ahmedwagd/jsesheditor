@@ -26,7 +26,7 @@ export default function EditorPage() {
                   Hieroglyphic Editor
                 </span>
                 <span className="text-[10px] text-stone-600 font-mono ml-2">
-                  SVG-first · 1800×1800
+                  SVG-first · 1800&times;1800
                 </span>
               </div>
             </div>
