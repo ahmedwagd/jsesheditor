@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools, subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { enableMapSet } from "immer";
 import { v4 as uuidv4 } from "uuid";
 import type {
   GlyphState,
@@ -11,6 +12,8 @@ import type {
 import { cycleRotation } from "@/lib/transform";
 import { composeSvg } from "@/lib/svgComposer";
 import { buildHtmlPayload, writeToClipboard } from "@/lib/clipboard";
+
+enableMapSet();
 
 // ─── State Shape ──────────────────────────────
 
