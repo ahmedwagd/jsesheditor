@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import type { GlyphState } from "@/types";
-import { GlyphRenderer } from "../editor/GlyphRenderer";
+import { GlyphRenderer } from "./GlyphRenderer";
 import { useEditorStore } from "@/store/useEditorStore";
 import { cn } from "@/lib/utils";
 

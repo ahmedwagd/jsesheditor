@@ -1,5 +1,6 @@
 import { EditorCanvas } from "@/components/canvas/EditorCanvas";
 import { PreviewPanel } from "@/components/canvas/PreviewPanel";
+import { StatusBar } from "@/components/canvas/StatusBar";
 import { GlyphLibrary } from "@/components/GlyphLibrary";
 import { Toolbar } from "@/components/toolbar/Toolbar";
 import { CodeInput } from "@/components/toolbar/CodeInput";
@@ -48,10 +49,7 @@ export default function EditorPage() {
 
             <main className="flex-1 flex flex-col p-4 min-h-0 overflow-hidden">
               <EditorCanvas />
-              <footer className="mt-2 text-[10px] font-mono text-stone-700 text-right shrink-0">
-                R rotate · H flip-H · V flip-V · Del delete · Ctrl+C copy ·
-                Ctrl+V paste · 0 reset · drag to reorder
-              </footer>
+              <StatusBar />
             </main>
 
             <PreviewPanel />
