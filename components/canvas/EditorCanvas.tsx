@@ -35,7 +35,7 @@ export function EditorCanvas() {
 
   return (
     <div
-      className="flex-1 min-h-0 overflow-auto bg-stone-200 rounded-lg border border-stone-800"
+      className="flex-1 min-h-0 overflow-auto bg-stone-950 rounded-lg border border-stone-800"
       onClick={deselectAll}
       aria-label="Editor canvas — click to deselect"
     >

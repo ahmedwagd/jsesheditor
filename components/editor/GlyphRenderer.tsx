@@ -42,8 +42,20 @@ export const GlyphRenderer = React.memo(function GlyphRenderer({
     [glyph.rotation, glyph.flipX, glyph.flipY, glyph.scale],
   );
 
+  const normalize = useMemo(() => {
+    if (!svgContent) return "";
+    const vb = extractViewBox(svgContent);
+    const base = QUADRAT_SIZE;
+    const w = vb?.width ?? base;
+    const h = vb?.height ?? base;
+    const s = base / Math.max(w, h);
+    return s !== 1 ? `scale(${s})` : "";
+  }, [svgContent]);
+
+  const finalTransform = normalize ? `${normalize} ${transform}` : transform;
+
   const innerMarkup = svgContent
-    ? extractSvgInner(svgContent)
+    ? sanitizeSvgInner(extractSvgInner(svgContent))
     : placeholderMarkup(glyph.gardinerCode);
 
   return (
@@ -73,7 +85,8 @@ export const GlyphRenderer = React.memo(function GlyphRenderer({
         aria-hidden="true"
       >
         <g
-          transform={transform}
+          transform={finalTransform}
+          fill="currentColor"
           dangerouslySetInnerHTML={{ __html: innerMarkup }}
         />
       </svg>
@@ -91,6 +104,28 @@ export const GlyphRenderer = React.memo(function GlyphRenderer({
 function extractSvgInner(rawSvg: string): string {
   const match = rawSvg.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
   return match ? match[1].trim() : rawSvg.trim();
+}
+
+function sanitizeSvgInner(inner: string): string {
+  return inner
+    .replace(/<metadata>[\s\S]*?<\/metadata>/gi, "")
+    .replace(/\s(inkscape|sodipodi|rdf|dc|cc):[a-z-]+="[^"]*"/gi, "")
+    .replace(/\sstyle="[^"]*"/gi, "")
+    .replace(/\sfill="[^"]*"/gi, "")
+    .replace(/\sstroke="[^"]*"/gi, "");
+}
+
+function extractViewBox(
+  rawSvg: string,
+): { width: number; height: number } | null {
+  const m = rawSvg.match(
+    /viewBox\s*=\s*"\s*[-\d.]+\s+[-\d.]+\s+([-\d.]+)\s+([-\d.]+)\s*"/i,
+  );
+  if (!m) return null;
+  const w = Number(m[1]);
+  const h = Number(m[2]);
+  if (!isFinite(w) || !isFinite(h) || w <= 0 || h <= 0) return null;
+  return { width: w, height: h };
 }
 
 function placeholderMarkup(code: string): string {

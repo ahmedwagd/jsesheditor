@@ -43,20 +43,25 @@ export function composeSvg(
       const rawSvg =
         svgContents.get(glyph.gardinerCode) ??
         placeholderSvg(glyph.gardinerCode);
-      const innerPaths = extractSvgInner(rawSvg);
-      const transform = buildSvgTransform({
+      const innerPaths = sanitizeSvgInner(extractSvgInner(rawSvg));
+      const intrinsic = extractViewBox(rawSvg);
+      const s = intrinsic
+        ? QUADRAT_SIZE / Math.max(intrinsic.width, intrinsic.height)
+        : 1;
+      const normalize = s !== 1 ? `scale(${s}) ` : "";
+      const transform = `${normalize}${buildSvgTransform({
         rotation: glyph.rotation,
         flipX: glyph.flipX,
         flipY: glyph.flipY,
         scale: glyph.scale,
-      });
+      })}`;
       const x = glyphXOffset(glyph.position, gap, padding);
 
       return [
         `  <g id="glyph-${glyph.instanceId}" data-code="${glyph.gardinerCode}">`,
         `    <svg x="${x}" y="${padding}" width="${QUADRAT_SIZE}" height="${QUADRAT_SIZE}"`,
         `         viewBox="0 0 ${QUADRAT_SIZE} ${QUADRAT_SIZE}">`,
-        `      <g transform="${transform}">`,
+        `      <g transform="${transform}" fill="currentColor">`,
         `        ${innerPaths}`,
         `      </g>`,
         `    </svg>`,
@@ -66,7 +71,14 @@ export function composeSvg(
     .join("\n");
 
   return [
-    `<svg xmlns="http://www.w3.org/2000/svg" ${sizeAttr} viewBox="${viewBoxAttr}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg"`,
+    `     xmlns:xlink="http://www.w3.org/1999/xlink"`,
+    `     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"`,
+    `     xmlns:cc="http://creativecommons.org/ns#"`,
+    `     xmlns:dc="http://purl.org/dc/elements/1.1/"`,
+    `     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"`,
+    `     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"`,
+    `     ${sizeAttr} viewBox="${viewBoxAttr}">`,
     glyphElements,
     `</svg>`,
   ].join("\n");
@@ -84,6 +96,35 @@ function extractSvgInner(rawSvg: string): string {
   // Extract content between <svg ...> and </svg>
   const match = clean.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
   return match ? match[1].trim() : clean.trim();
+}
+
+/**
+ * Sanitizes inner SVG content by removing namespaced attributes and metadata
+ * that can cause XML parsing errors if the namespaces aren't defined.
+ */
+function sanitizeSvgInner(inner: string): string {
+  return inner
+    .replace(/<metadata>[\s\S]*?<\/metadata>/gi, "")
+    .replace(/\s(inkscape|sodipodi|rdf|dc|cc):[a-z-]+="[^"]*"/gi, "")
+    .replace(/\sstyle="[^"]*"/gi, "")
+    .replace(/\sfill="[^"]*"/gi, "")
+    .replace(/\sstroke="[^"]*"/gi, "");
+}
+
+/**
+ * Extracts the intrinsic viewBox from raw SVG content.
+ */
+function extractViewBox(
+  rawSvg: string,
+): { width: number; height: number } | null {
+  const m = rawSvg.match(
+    /viewBox\s*=\s*"\s*[-\d.]+\s+[-\d.]+\s+([-\d.]+)\s+([-\d.]+)\s*"/i,
+  );
+  if (!m) return null;
+  const w = Number(m[1]);
+  const h = Number(m[2]);
+  if (!isFinite(w) || !isFinite(h) || w <= 0 || h <= 0) return null;
+  return { width: w, height: h };
 }
 
 /**
