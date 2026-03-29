@@ -81,8 +81,10 @@ export function PreviewPanel() {
       <div className="flex-1 flex items-center justify-center p-4 overflow-hidden">
         {composedSvg ? (
           <div
-            className="w-full max-h-full overflow-hidden rounded border border-stone-800 bg-white"
-            dangerouslySetInnerHTML={{ __html: composedSvg }}
+            className="w-full max-h-full overflow-hidden rounded border border-stone-800 bg-white text-black flex items-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: composedSvg.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'height="100%"')
+            }}
             title="Export preview — this exact SVG is copied to clipboard"
           />
         ) : (
