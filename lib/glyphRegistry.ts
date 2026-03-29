@@ -12,74 +12,8 @@ import type { GardinerCode, GlyphRegistryEntry } from "@/types";
  */
 const REGISTRY_SEED: Omit<GlyphRegistryEntry, "svgContent">[] = [
   {
-    code: "A1",
-    name: "Seated man",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A1A",
-    name: "Forearm",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A1B",
-    name: "Owl",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A1C",
-    name: "Water (ripple)",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A2",
-    name: "House plan",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
     code: "A2A",
     name: "Folded cloth",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A3A",
-    name: "Bread loaf",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A3B",
-    name: "Single stroke (numeric)",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A4",
-    name: "House plan",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A4A",
-    name: "Folded cloth",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A4B",
-    name: "Single stroke (numeric)",
-    category: "A",
-    viewBox: { width: 1800, height: 1800 },
-  },
-  {
-    code: "A4C",
-    name: "Single stroke (numeric)",
     category: "A",
     viewBox: { width: 1800, height: 1800 },
   },
@@ -87,6 +21,42 @@ const REGISTRY_SEED: Omit<GlyphRegistryEntry, "svgContent">[] = [
     code: "A4D",
     name: "Single stroke (numeric)",
     category: "A",
+    viewBox: { width: 1800, height: 1800 },
+  },
+  {
+    code: "A18",
+    name: "Single stroke (numeric)",
+    category: "A",
+    viewBox: { width: 1800, height: 1800 },
+  },
+  {
+    code: "B6",
+    name: "Single stroke (numeric)",
+    category: "B",
+    viewBox: { width: 1800, height: 1800 },
+  },
+  {
+    code: "C16",
+    name: "Single stroke (numeric)",
+    category: "C",
+    viewBox: { width: 1800, height: 1800 },
+  },
+  {
+    code: "D330",
+    name: "Single stroke (numeric)",
+    category: "D",
+    viewBox: { width: 1800, height: 1800 },
+  },
+  {
+    code: "E10",
+    name: "Single stroke (numeric)",
+    category: "E",
+    viewBox: { width: 1800, height: 1800 },
+  },
+  {
+    code: "F12",
+    name: "Single stroke (numeric)",
+    category: "F",
     viewBox: { width: 1800, height: 1800 },
   },
 ];
