@@ -24,7 +24,7 @@ export default function EditorPage() {
               </span>
               <div>
                 <span className="text-sm font-semibold tracking-wide text-stone-200">
-                  Hieroglyphic Editor
+                  JSesh SVG Editor
                 </span>
                 <span className="text-[10px] text-stone-600 font-mono ml-2">
                   SVG-first · 1800&times;1800

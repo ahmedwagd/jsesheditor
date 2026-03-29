@@ -6,7 +6,7 @@ A web-based, SVG-first hieroglyphic composition tool inspired by [JSesh](http://
 
 | Layer         | Technology                      |
 | ------------- | ------------------------------- |
-| Framework     | Next.js 15 (App Router)         |
+| Framework     | Next.js 16 (App Router)         |
 | UI components | shadcn/ui + Tailwind CSS        |
 | State         | Zustand 5 with Immer middleware |
 | Language      | TypeScript (strict)             |
